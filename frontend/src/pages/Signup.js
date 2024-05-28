@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import loginIcon from '../assest/signin.gif'
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import imageToBase64 from '../helper/ImageToBase64';
+import summaryAPI from '../common';
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
 
@@ -16,6 +19,7 @@ function Signup() {
         password: "",
         confirmPassword:""
     })
+    const navigate = useNavigate();
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -28,8 +32,36 @@ function Signup() {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); //avoid page refresh
+
+        //check if password and confirm password is same
+        if(data.password === data.confirmPassword){
+
+            //do the api call
+            const apiResponse =  await fetch(summaryAPI.signup.url, {
+                method: summaryAPI.signup.method,
+                headers:{
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            //convert the response 
+            const resp =  await apiResponse.json();
+            console.log(resp);
+            if(resp.success){
+                //on success show toast and navigate to login page
+                toast.success(resp.message)
+                navigate('/login')
+            }
+            if(resp.error){
+                toast.error(resp.message)
+            }
+        }else{
+            toast.error("check password and confirm password");
+        }
+
+
     }
 
     const handleUploadPic = async (e) => {
@@ -47,9 +79,6 @@ function Signup() {
         })
     }
 
-    
-
-    console.log("data Signup", data);
     return (
         <section id="signup">
             <div className='mx-auto container px-4'>

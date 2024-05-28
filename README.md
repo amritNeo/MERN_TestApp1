@@ -9,9 +9,15 @@ npm i cookie-parser
 npm i bcrypt
 
 
+
 FRONTEND Packages
 
 npm install --save react-toastify
+
+npm install @reduxjs/toolkit react-redux
+
+
+
 
 
 

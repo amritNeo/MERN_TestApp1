@@ -5,7 +5,6 @@ const router = require("../routes");
 
 async function userSignUpController(request, response){
     try {
-      
         const {email, password, name} =  request.body
         console.log(request.body)
 
@@ -14,7 +13,6 @@ async function userSignUpController(request, response){
         if(user){
             throw new Error("User already exisits");
         }
-
         if(!email){
             throw new Error("Please provide email");
         }
@@ -32,10 +30,11 @@ async function userSignUpController(request, response){
         }
         const payload = {
             ...request.body,
+            role: "GENERAL",
             password:hashPassword
         }
         const userData = new userModel(payload)
-        const saveUser = userData.save()
+        const saveUser = await userData.save()
         response.status(201).json({
             data : saveUser,
             success : true,
@@ -45,7 +44,7 @@ async function userSignUpController(request, response){
 
     } catch (error) {
         response.json({
-            message: error,
+            message: error.message,
             error :true,
             success:false
         })
