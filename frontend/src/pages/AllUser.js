@@ -43,7 +43,7 @@ const AllUser = () => {
   return (
     <div>
       <table className="w-full usertable">
-        <thead>
+        <thead className='bg-gray-700 text-white'>
           <th>Sr.</th>
           <th>Name</th>
           <th>Email Id</th>
@@ -51,7 +51,7 @@ const AllUser = () => {
           <th>Created Date</th>
           <th>Action</th>
         </thead>
-        <tbody>
+        <tbody className="w-full usertable">
           {
             allUsers.map((element, index) => {
               return (

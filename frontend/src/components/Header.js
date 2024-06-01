@@ -61,7 +61,7 @@ const Header = () => {
                         {
                             adminPopup &&  <div className='absolute bg-white bottom-0 top-11 h-fit p-4 '>
                                 <nav>
-                                    <Link to={"admin-panel"} className='whitespace-nowrap hover:bg-slate-100 p-2' onClick={()=> setAdminPopup(prev => !prev)}>Admin Panel</Link>
+                                    <Link to={"/admin-panel/products"} className='whitespace-nowrap hover:bg-slate-100 p-2' onClick={()=> setAdminPopup(prev => !prev)}>Admin Panel</Link>
                                 </nav>
                             </div>
                         }
