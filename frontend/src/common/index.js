@@ -1,4 +1,4 @@
-const backendDomain = "https://mern-test-app1-backend.vercel.app/"
+const backendDomain = "https://mern-test-app1-backend.vercel.app"
 
 const summaryAPI = {
     signup : {
